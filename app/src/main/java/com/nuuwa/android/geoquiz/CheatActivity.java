@@ -2,7 +2,7 @@ package com.nuuwa.android.geoquiz;
 
 import android.content.Context;
 import android.content.Intent;
-import android.nuuwa.com.qeoquiz.R;
+import android.nuuwa.com.geoquiz.R;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;

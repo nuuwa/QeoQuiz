@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QeoQuiz</string>
+    <string name="app_name">GeoQuiz</string>
     <string name="action_settings">Settings</string>
     <string name="question_australia">Canberra is the capital of Australia.</string>
     <string name="question_oceans">The Pacific Ocean is larger than
