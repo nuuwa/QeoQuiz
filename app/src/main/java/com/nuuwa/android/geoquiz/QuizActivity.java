@@ -1,5 +1,6 @@
-package android.nuuwa.com.qeoquiz;
+package com.nuuwa.android.geoquiz;
 
+import android.nuuwa.com.qeoquiz.R;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,12 +20,12 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[] {
-            new Question(R.string.question_australia, true),
-            new Question(R.string.question_oceans, true),
-            new Question(R.string.question_mideast, false),
-            new Question(R.string.question_africa, false),
-            new Question(R.string.question_americas, true),
-            new Question(R.string.question_asia, true),
+            new Question(R.string.question_australia, true, true),
+            new Question(R.string.question_oceans, true, true),
+            new Question(R.string.question_mideast, false, true),
+            new Question(R.string.question_africa, false, true),
+            new Question(R.string.question_americas, true, true),
+            new Question(R.string.question_asia, true, true),
     };
 
     private int mCurrentIndex = 0;
@@ -46,6 +47,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(true);
+                updateAnswerButtons();
             }
         });
 
@@ -54,6 +56,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(false);
+                updateAnswerButtons();
             }
         });
 
@@ -63,6 +66,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + mQuestionBank.length - 1) % mQuestionBank.length;
                 updateQuestion();
+                updateAnswerButtons();
             }
         });
 
@@ -72,6 +76,7 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
+                updateAnswerButtons();
             }
         });
 
@@ -116,8 +121,13 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
-        int question = mQuestionBank[mCurrentIndex].getTextResId();
-        mQuestionTextView.setText(question);
+        int questionId = mQuestionBank[mCurrentIndex].getTextResId();
+        mQuestionTextView.setText(questionId);
+    }
+
+    private void updateAnswerButtons() {
+        mTrueButton.setEnabled(mQuestionBank[mCurrentIndex].isAnswerable());
+        mFalseButton.setEnabled(mQuestionBank[mCurrentIndex].isAnswerable());
     }
 
     private void checkAnswer(boolean userPressedTrue) {
@@ -131,7 +141,10 @@ public class QuizActivity extends AppCompatActivity {
             messageResId = R.string.incorrect_toast;
         }
 
+        mQuestionBank[mCurrentIndex].setAnswerable(false);
+
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT)
                 .show();
     }
+
 }

@@ -1,13 +1,15 @@
-package android.nuuwa.com.qeoquiz;
+package com.nuuwa.android.geoquiz;
 
 public class Question {
 
     private int mTextResId;
     private boolean mAnswerTrue;
+    private boolean mAnswerable;
 
-    public Question(int textResId, boolean answerTrue) {
+    public Question(int textResId, boolean answerTrue, boolean answerable) {
         mTextResId = textResId;
         mAnswerTrue = answerTrue;
+        mAnswerable = answerable;
     }
 
     public int getTextResId() {
@@ -24,5 +26,13 @@ public class Question {
 
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;
+    }
+
+    public boolean isAnswerable() {
+        return mAnswerable;
+    }
+
+    public void setAnswerable(boolean answerable) {
+        this.mAnswerable = answerable;
     }
 }
